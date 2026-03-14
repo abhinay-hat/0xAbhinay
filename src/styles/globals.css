@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* ============================================
+   ABHINAY'S LAB — Design Token System v3
+   Warm, playful, explorable.
+   ============================================ */
+
+@theme {
+  /* Backgrounds */
+  --color-bg-deep: #0F0F1A;
+  --color-bg-room: #1A1A2E;
+  --color-bg-surface: #16213E;
+  --color-bg-card: #1E2D4A;
+  --color-border: #2A3F5F;
+
+  /* Primary: Warm Orange Energy */
+  --color-orange: #FF6B35;
+  --color-orange-glow: rgba(255, 107, 53, 0.3);
+  --color-orange-subtle: rgba(255, 107, 53, 0.1);
+
+  /* Secondary: Tech Cyan */
+  --color-cyan: #00D4FF;
+  --color-cyan-glow: rgba(0, 212, 255, 0.3);
+  --color-cyan-subtle: rgba(0, 212, 255, 0.08);
+
+  /* Tertiary: Warm Amber */
+  --color-amber: #FFB347;
+  --color-amber-glow: rgba(255, 179, 71, 0.3);
+
+  /* Terminal Green */
+  --color-green: #4ADE80;
+  --color-green-glow: rgba(74, 222, 128, 0.3);
+
+  /* Text */
+  --color-text-bright: #F1F5F9;
+  --color-text-body: #CBD5E1;
+  --color-text-muted: #64748B;
+
+  /* Fonts — Syne everywhere, JetBrains Mono for code only */
+  --font-display: 'Syne', sans-serif;
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-comic: 'Syne', sans-serif;
+}
+
+/* ============================================
+   Base Reset & Styles
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Noise / Grain Overlay
+   ============================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-orange); }
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background: rgba(255, 107, 53, 0.25);
+  color: var(--color-text-bright);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, var(--color-orange), var(--color-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--color-cyan), #7dd3fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass {
+  background: rgba(22, 33, 62, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(42, 63, 95, 0.6);
+}
+
+.glass-dark {
+  background: rgba(15, 15, 26, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(42, 63, 95, 0.4);
+}
+
+/* ============================================
+   CRT Scanline Effect (Terminal)
+   ============================================ */
+
+.crt-overlay {
+  position: relative;
+}
+.crt-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 50;
+}
+
+/* ============================================
+   Glow Effects
+   ============================================ */
+
+.glow-orange {
+  box-shadow: 0 0 20px var(--color-orange-glow), 0 0 60px rgba(255, 107, 53, 0.1);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px var(--color-cyan-glow), 0 0 60px rgba(0, 212, 255, 0.1);
+}
+
+.glow-text-orange {
+  text-shadow: 0 0 20px var(--color-orange-glow), 0 0 40px rgba(255, 107, 53, 0.15);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 20px var(--color-cyan-glow), 0 0 40px rgba(0, 212, 255, 0.15);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes steam {
+  0% { transform: translateY(0) scale(1); opacity: 0.6; }
+  100% { transform: translateY(-20px) scale(1.5); opacity: 0; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+  96% { opacity: 0.85; }
+  97% { opacity: 1; }
+}
+
+@keyframes typewriter-cursor {
+  0%, 100% { border-right-color: currentColor; }
+  50% { border-right-color: transparent; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+/* ============================================
+   Focus States (Accessibility)
+   ============================================ */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Additional Utility Classes
+   ============================================ */
+
+.glass-card {
+  background: rgba(22, 33, 62, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(42, 63, 95, 0.5);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  box-shadow: 0 16px 48px rgba(255, 107, 53, 0.12), 0 0 0 1px rgba(255, 107, 53, 0.1);
+  transform: translateY(-4px);
+}
+
+.shimmer-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 107, 53, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shimmer-border:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
