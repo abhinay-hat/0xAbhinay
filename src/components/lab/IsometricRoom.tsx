@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import { X } from 'lucide-react'
 import { labObjects, type LabObject } from '../../data/lab-objects'
@@ -224,7 +224,7 @@ export function IsometricRoom({ onModeChange }: IsometricRoomProps) {
                 <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" repeatCount="indefinite" />
               </rect>
               <rect x="-175" y="-16" width="2" height="2" fill="#FFB347" opacity="0.3">
-                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="5s" repeatCount="indefinite" delay="1s" />
+                <animate attributeName="opacity" values="0.1;0.5;0.1" dur="5s" repeatCount="indefinite" begin="1s" />
               </rect>
               <rect x="-145" y="-24" width="2" height="2" fill="#00D4FF" opacity="0.3">
                 <animate attributeName="opacity" values="0.2;0.4;0.2" dur="3s" repeatCount="indefinite" />
@@ -380,7 +380,7 @@ export function IsometricRoom({ onModeChange }: IsometricRoomProps) {
                   <animateTransform attributeName="transform" type="translate" values="0,0;-2,-5;0,0" dur="2.5s" repeatCount="indefinite" />
                 </path>
                 <path d="M155,-17 Q153,-30 157,-40" fill="none" stroke="#94A3B8" strokeWidth="0.8" strokeLinecap="round">
-                  <animate attributeName="opacity" values="0.05;0.4;0.05" dur="3.5s" repeatCount="indefinite" delay="0.5s" />
+                  <animate attributeName="opacity" values="0.05;0.4;0.05" dur="3.5s" repeatCount="indefinite" begin="0.5s" />
                   <animateTransform attributeName="transform" type="translate" values="0,0;0,-6;0,0" dur="3.5s" repeatCount="indefinite" />
                 </path>
                 <path d="M158,-17 Q156,-30 160,-38" fill="none" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round">
