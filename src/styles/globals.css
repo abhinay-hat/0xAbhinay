@@ -13,14 +13,6 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html,
 body,
 #root {
@@ -86,11 +78,6 @@ body {
     420px 420px;
   background-blend-mode: normal, normal, soft-light, multiply;
   filter: hue-rotate(95deg) saturate(0.85);
-}
-
-.silk-ground > * {
-  position: relative;
-  z-index: 1;
 }
 
 .weft-quote {
